@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="login-container">
     <div class="logo">
       <img
         alt="logo"
@@ -26,7 +26,7 @@
 </script>
 
 <style lang="less" scoped>
-  .container {
+  .login-container {
     display: flex;
     height: 100vh;
 

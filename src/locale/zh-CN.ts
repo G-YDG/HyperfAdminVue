@@ -1,7 +1,9 @@
+import localeSystem from '@/views/system/locale/zh-CN';
 import localeLogin from '@/views/login/locale/zh-CN';
 import localeWorkplace from '@/views/dashboard/workplace/locale/zh-CN';
 import localeMenu from './zh-CN/menu';
 import localeSettings from './zh-CN/settings';
+import localeSearch from './zh-CN/search';
 
 export default {
   'navbar.docs': '文档中心',
@@ -12,6 +14,8 @@ export default {
   'navbar.logout': '退出登录',
   ...localeMenu,
   ...localeSettings,
+  ...localeSearch,
   ...localeLogin,
   ...localeWorkplace,
+  ...localeSystem,
 };

@@ -24,9 +24,16 @@ export interface PostData {
 }
 
 export interface Pagination {
-  current: number;
+  page: number;
   pageSize: number;
+  current?: number;
   total?: number;
+}
+
+export interface PageInfo {
+  total: number;
+  currentPage: number;
+  totalPage: number;
 }
 
 export type TimeRanger = [string, string];
@@ -34,4 +41,14 @@ export type TimeRanger = [string, string];
 export interface GeneralChart {
   xAxis: string[];
   data: Array<{ name: string; value: number[] }>;
+}
+
+export type SizeProps = 'mini' | 'small' | 'medium' | 'large';
+
+export interface SearchConfig {
+  key: string;
+  label: string;
+  type: string;
+  placeholder: string;
+  options?: Array<any>;
 }

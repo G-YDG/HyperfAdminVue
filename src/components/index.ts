@@ -11,6 +11,8 @@ import {
 } from 'echarts/components';
 import Chart from './chart/index.vue';
 import Breadcrumb from './breadcrumb/index.vue';
+import Search from './search/index.vue';
+import TableData from './table-data/index.vue';
 
 // Manually introduce ECharts modules to reduce packing size
 
@@ -31,5 +33,7 @@ export default {
   install(Vue: App) {
     Vue.component('Chart', Chart);
     Vue.component('Breadcrumb', Breadcrumb);
+    Vue.component('Search', Search);
+    Vue.component('TableData', TableData);
   },
 };

@@ -1,7 +1,9 @@
+import localeSystem from '@/views/system/locale/en-US';
 import localeLogin from '@/views/login/locale/en-US';
 import localeWorkplace from '@/views/dashboard/workplace/locale/en-US';
 import localeMenu from './en-US/menu';
 import localeSettings from './en-US/settings';
+import localeSearch from './en-US/search';
 
 export default {
   'navbar.docs': 'Docs',
@@ -12,6 +14,8 @@ export default {
   'navbar.logout': 'Logout',
   ...localeMenu,
   ...localeSettings,
+  ...localeSearch,
   ...localeLogin,
   ...localeWorkplace,
+  ...localeSystem,
 };
