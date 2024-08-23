@@ -11,8 +11,6 @@ import {
 } from 'echarts/components';
 import Chart from './chart/index.vue';
 import Breadcrumb from './breadcrumb/index.vue';
-import Search from './search/index.vue';
-import TableData from './table-data/index.vue';
 import HaSearch from './ha-search/index.vue';
 import HaTableData from './ha-table-data/index.vue';
 
@@ -35,8 +33,6 @@ export default {
   install(Vue: App) {
     Vue.component('Chart', Chart);
     Vue.component('Breadcrumb', Breadcrumb);
-    Vue.component('Search', Search);
-    Vue.component('TableData', TableData);
     Vue.component('HaSearch', HaSearch);
     Vue.component('HaTableData', HaTableData);
   },
