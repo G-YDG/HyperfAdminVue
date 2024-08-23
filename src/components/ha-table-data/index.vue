@@ -41,7 +41,7 @@
   </a-form>
 
   <!--  搜索按钮&刷新按钮 -->
-  <a-col style="margin: 5px 76px">
+  <a-col v-if="searchConfig.length > 0" style="margin: 5px 76px">
     <a-space :size="16">
       <a-button type="primary" @click="search">
         <template #icon>
@@ -102,7 +102,7 @@
     row-key="id"
     :bordered="false"
     :loading="loading"
-    :pagination="tablePagination"
+    :pagination="showTablePagination ? tablePagination : false"
     :data="tableData"
     :size="tableSize"
     @page-change="onTablePageChange"
@@ -129,7 +129,7 @@
           column.dataIndex === 'operations' ? false : column.tooltip ?? true
         "
         :align="column.align || 'left'"
-        :fixed="column.fixed"
+        :fixed="column.dataIndex === 'operations' ? 'right' : column.fixed"
       >
         <template #cell="{ record }">
           <slot
@@ -172,11 +172,20 @@
     },
     tableDataApi: {
       type: Function,
+      default: () => {
+        return undefined;
+      },
     },
     tablePageSize: {
       type: Number,
       default: () => {
-        return 20;
+        return 10;
+      },
+    },
+    showTablePagination: {
+      type: Boolean,
+      default: () => {
+        return true;
       },
     },
   });
@@ -212,6 +221,7 @@
   const tableDataApi = ref(props.tableDataApi);
   const tableColumns = ref(props.tableColumns);
   const tablePageSize = ref(props.tablePageSize);
+  const showTablePagination = ref(props.showTablePagination);
 
   // 分页
   const basePagination: Pagination = {
@@ -225,8 +235,10 @@
     try {
       const { data } = await tableDataApi.value(params);
       tableData.value = data.items;
-      tablePagination.current = data.pageInfo.currentPage;
-      tablePagination.total = data.pageInfo.total;
+      if (data.pageInfo !== undefined) {
+        tablePagination.current = data.pageInfo.currentPage;
+        tablePagination.total = data.pageInfo.total;
+      }
     } catch (err) {
       Message.error('获取数据失败');
     } finally {

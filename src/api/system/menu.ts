@@ -22,8 +22,8 @@ export interface MenuRecord {
   children: MenuRecord[];
 }
 
-export function index() {
-  return axios.get<MenuRecord[]>('/system/menu/index');
+export function list() {
+  return axios.get<MenuRecord[]>('/system/menu/list');
 }
 
 export function tree() {
