@@ -1,15 +1,12 @@
 <template>
   <div class="container">
-    <!--    面包屑-->
     <Breadcrumb :items="['menu.system', 'menu.system.role']" />
 
-    <!--    卡片内容-->
     <a-card class="general-card" :title="$t('searchTable.title')">
       <HaTableData
         ref="tableRef"
         :search-model="searchModel"
         :search-config="searchConfig"
-        :table-loading="loading"
         :table-columns="tableColumns"
         :table-data-api="index"
       >
