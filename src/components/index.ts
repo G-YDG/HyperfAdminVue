@@ -13,6 +13,7 @@ import Chart from './chart/index.vue';
 import Breadcrumb from './breadcrumb/index.vue';
 import Search from './search/index.vue';
 import TableData from './table-data/index.vue';
+import HaSearch from './ha-search/index.vue';
 import HaTableData from './ha-table-data/index.vue';
 
 // Manually introduce ECharts modules to reduce packing size
@@ -36,6 +37,7 @@ export default {
     Vue.component('Breadcrumb', Breadcrumb);
     Vue.component('Search', Search);
     Vue.component('TableData', TableData);
+    Vue.component('HaSearch', HaSearch);
     Vue.component('HaTableData', HaTableData);
   },
 };

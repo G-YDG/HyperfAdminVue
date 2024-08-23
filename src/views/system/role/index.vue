@@ -9,7 +9,7 @@
         ref="tableRef"
         :search-model="searchModel"
         :search-config="searchConfig"
-        :table-loading="tableLoading"
+        :table-loading="loading"
         :table-columns="tableColumns"
         :table-data-api="index"
       >
@@ -63,10 +63,8 @@
   import { RoleModel, index, deleted } from '@/api/system/role';
   import MenuPermission from '@/views/system/role/components/menu-permission.vue';
   import DataForm from '@/views/system/role/components/data-form.vue';
-  import useLoading from '@/hooks/loading';
 
   const { t } = useI18n();
-  const { tableLoading, setLoading } = useLoading(true);
 
   const tableRef = ref();
   const dataFormRef = ref();
@@ -146,15 +144,12 @@
   };
 
   const onDelete = async (id: string) => {
-    setLoading(true);
     try {
       await deleted(id);
       tableRef.value.refresh();
       Message.success('删除成功');
     } catch (err) {
       Message.error('删除失败');
-    } finally {
-      setLoading(false);
     }
   };
 </script>

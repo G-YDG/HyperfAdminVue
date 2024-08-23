@@ -1,62 +1,11 @@
 <template>
   <!--      搜索框-->
-  <a-form ref="searchRef" :model="searchModel" label-align="center">
-    <a-row>
-      <a-col
-        v-for="(config, configIndex) in searchConfig"
-        :key="configIndex"
-        :xs="24"
-        :sm="16"
-        :md="12"
-        :lg="8"
-        :xl="6"
-        :xxl="6"
-      >
-        <a-form-item
-          :prop="config.key"
-          :field="config.key"
-          :label="config.label"
-          label-col-flex="60px"
-        >
-          <slot
-            v-if="config.useSlot"
-            :name="config.slotName || 'default'"
-          ></slot>
-          <component
-            :is="config.type"
-            v-else
-            v-model="searchModel[config.key]"
-            :placeholder="config.placeholder"
-          >
-            <a-option
-              v-for="(option, index) in config.options"
-              :key="index"
-              :label="option.label"
-              :value="option.value"
-            />
-          </component>
-        </a-form-item>
-      </a-col>
-    </a-row>
-  </a-form>
-
-  <!--  搜索按钮&刷新按钮 -->
-  <a-col style="margin: 5px 76px">
-    <a-space :size="16">
-      <a-button type="primary" @click="search">
-        <template #icon>
-          <icon-search />
-        </template>
-        {{ $t('searchTable.form.search') }}
-      </a-button>
-      <a-button @click="reset">
-        <template #icon>
-          <icon-refresh />
-        </template>
-        {{ $t('searchTable.form.reset') }}
-      </a-button>
-    </a-space>
-  </a-col>
+  <HaSearch
+    :search-model="searchModel"
+    :search-config="searchConfig"
+    @search="search"
+    @reset="reset"
+  />
 
   <!--      分割线-->
   <a-divider style="margin-top: 0" />
@@ -101,7 +50,7 @@
   <a-table
     row-key="id"
     :bordered="false"
-    :loading="tableLoading"
+    :loading="loading"
     :pagination="tablePagination"
     :data="tableData"
     :size="tableSize"
@@ -145,10 +94,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, computed, reactive } from 'vue';
+  import { ref, reactive, computed } from 'vue';
   import { Pagination, SizeProps } from '@/types/global';
-  import { useI18n } from 'vue-i18n';
   import { Message } from '@arco-design/web-vue';
+  import { useI18n } from 'vue-i18n';
   import useLoading from '@/hooks/loading';
 
   const props = defineProps({
@@ -207,7 +156,7 @@
     },
   ]);
   // 表格
-  const { tableLoading, setLoading } = useLoading(true);
+  const { loading, setLoading } = useLoading(true);
   const tableData = ref<[]>([]);
   const tableDataApi = ref(props.tableDataApi);
   const tableColumns = ref(props.tableColumns);
