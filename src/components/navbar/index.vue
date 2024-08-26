@@ -7,10 +7,11 @@
           src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image"
         />
         <a-typography-title
+          v-if="appStore.device !== 'mobile'"
           :style="{ margin: 0, fontSize: '18px' }"
           :heading="5"
         >
-          Arco Pro
+          {{ $t('website.title') }}
         </a-typography-title>
         <icon-menu-fold
           v-if="!topMenu && appStore.device === 'mobile'"
@@ -118,10 +119,10 @@
           </a-avatar>
           <template #content>
             <a-doption>
-              <a-space @click="$router.push({ name: 'UserCenter' })">
+              <a-space @click="$router.push({ name: 'UserInfo' })">
                 <icon-user />
                 <span>
-                  {{ $t('navbar.userCenter') }}
+                  {{ $t('navbar.userInfo') }}
                 </span>
               </a-space>
             </a-doption>

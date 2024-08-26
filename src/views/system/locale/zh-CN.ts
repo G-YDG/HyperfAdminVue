@@ -21,15 +21,6 @@ export default {
   'user.form.email.placeholder': '请输入邮箱',
   'user.form.role': '角色',
 
-  'user.form.oldPassword': '旧密码',
-  'user.form.oldPassword.placeholder': '请输入旧密码',
-  'user.form.newPassword': '新密码',
-  'user.form.newPassword.placeholder': '请输入新密码',
-  'user.form.newPassword_confirmation': '确认密码',
-  'user.form.newPassword_confirmation.placeholder': '请输入确认密码',
-  'user.form.personal': '个人资料',
-  'user.form.safe': '安全设置',
-
   'role.form.id': 'ID',
   'role.form.name': '角色名称',
   'role.form.name.placeholder': '请输入角色名称',

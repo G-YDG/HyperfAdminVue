@@ -45,17 +45,6 @@ const SYSTEM: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
-    {
-      path: 'userCenter',
-      name: 'UserCenter',
-      component: () => import('@/views/system/user-center/index.vue'),
-      meta: {
-        locale: 'menu.system.userCenter',
-        requiresAuth: true,
-        hideInMenu: true,
-        roles: ['*'],
-      },
-    },
   ],
 };
 

@@ -22,6 +22,17 @@ const DASHBOARD: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
+    {
+      path: 'userInfo',
+      name: 'UserInfo',
+      component: () => import('@/views/dashboard/user-info/index.vue'),
+      meta: {
+        locale: 'menu.dashboard.userInfo',
+        requiresAuth: true,
+        hideInMenu: true,
+        roles: ['*'],
+      },
+    },
   ],
 };
 
