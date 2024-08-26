@@ -3,6 +3,7 @@ export default {
   'menu.system.user': 'User Manager',
   'menu.system.role': 'Role Manager',
   'menu.system.menu': 'Menu Manager',
+  'menu.system.userCenter': 'User Center',
 
   'user.form.username': 'Username',
   'user.form.username.placeholder': 'Please enter Set Username',

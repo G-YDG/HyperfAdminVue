@@ -118,6 +118,14 @@
           </a-avatar>
           <template #content>
             <a-doption>
+              <a-space @click="$router.push({ name: 'UserCenter' })">
+                <icon-user />
+                <span>
+                  {{ $t('navbar.userCenter') }}
+                </span>
+              </a-space>
+            </a-doption>
+            <a-doption>
               <a-space @click="handleLogout">
                 <icon-export />
                 <span>

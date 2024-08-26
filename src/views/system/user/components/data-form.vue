@@ -41,7 +41,7 @@
           :placeholder="$t('searchTable.form.select')"
         />
       </a-form-item>
-      <a-form-item field="status" :label="$t('role.form.status')">
+      <a-form-item field="status" :label="$t('user.form.status')">
         <a-select
           v-model="formModel.status"
           :default-value="1"

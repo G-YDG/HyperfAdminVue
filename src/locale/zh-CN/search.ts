@@ -19,6 +19,7 @@ export default {
   'searchTable.operation.view': '查看',
   'searchTable.operation.menu': '菜单',
   'searchTable.operation.copy': '复制',
+  'searchTable.operation.save': '保存',
   // actions
   'searchTable.actions.columnSetting': '列设置',
   'searchTable.actions.refresh': '刷新',

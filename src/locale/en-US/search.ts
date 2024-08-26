@@ -19,6 +19,7 @@ export default {
   'searchTable.operation.view': 'View',
   'searchTable.operation.menu': 'Menu',
   'searchTable.operation.copy': 'Copy',
+  'searchTable.operation.save': 'Save',
   // actions
   'searchTable.actions.columnSetting': 'ColumnSetting',
   'searchTable.actions.refresh': 'Refresh',

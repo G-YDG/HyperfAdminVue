@@ -25,3 +25,11 @@ export function getUserInfo() {
 export function getMenuList() {
   return axios.get<RouteRecordNormalized[]>('/system/user/menu');
 }
+
+export function updateInfo(data: any) {
+  return axios.post(`/system/user/updateInfo`, data);
+}
+
+export function modifyPassword(data: any) {
+  return axios.post(`/system/user/modifyPassword`, data);
+}
