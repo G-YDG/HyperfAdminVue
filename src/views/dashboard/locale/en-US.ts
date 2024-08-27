@@ -12,4 +12,6 @@ export default {
   'userInfo.form.newPassword_confirmation': 'ConfirmationPassword',
   'userInfo.form.newPassword_confirmation.placeholder':
     'Please enter confirmation new password',
+
+  'workplace.welcome': ',Welcome!',
 };

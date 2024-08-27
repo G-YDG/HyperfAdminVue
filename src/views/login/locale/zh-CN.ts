@@ -10,6 +10,4 @@ export default {
   'login.form.forgetPassword': '忘记密码',
   'login.form.login': '登录',
   'login.form.register': '注册账号',
-  'login.banner.slogan': '开箱即用的高质量后台管理系统',
-  'login.banner.subSlogan': '灵活、快速、高效开发',
 };

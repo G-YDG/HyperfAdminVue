@@ -11,4 +11,6 @@ export default {
   'userInfo.form.newPassword.placeholder': '请输入新密码',
   'userInfo.form.newPassword_confirmation': '确认密码',
   'userInfo.form.newPassword_confirmation.placeholder': '请输入确认密码',
+
+  'workplace.welcome': '，欢迎使用！',
 };

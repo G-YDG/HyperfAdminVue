@@ -1,6 +1,4 @@
 import { defineStore } from 'pinia';
-import { Notification } from '@arco-design/web-vue';
-import type { NotificationReturn } from '@arco-design/web-vue/es/notification/interface';
 import type { RouteRecordNormalized } from 'vue-router';
 import defaultSettings from '@/config/settings.json';
 import { getMenuList } from '@/api/user';
@@ -45,28 +43,8 @@ const useAppStore = defineStore('app', {
       this.hideMenu = value;
     },
     async fetchServerMenuConfig() {
-      let notifyInstance: NotificationReturn | null = null;
-      try {
-        notifyInstance = Notification.info({
-          id: 'menuNotice', // Keep the instance id the same
-          content: 'loading',
-          closable: true,
-        });
-        const { data } = await getMenuList();
-        this.serverMenu = data;
-        notifyInstance = Notification.success({
-          id: 'menuNotice',
-          content: 'success',
-          closable: true,
-        });
-      } catch (error) {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        notifyInstance = Notification.error({
-          id: 'menuNotice',
-          content: 'error',
-          closable: true,
-        });
-      }
+      const { data } = await getMenuList();
+      this.serverMenu = data;
     },
     clearServerMenu() {
       this.serverMenu = [];

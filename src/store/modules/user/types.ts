@@ -6,6 +6,8 @@ export interface UserState {
   avatar?: string;
   phone?: string;
   email?: string;
+  login_time?: string;
+  login_ip?: string;
   role: RoleType;
   roles: RoleType[];
 }

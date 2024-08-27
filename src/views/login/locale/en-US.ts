@@ -10,6 +10,4 @@ export default {
   'login.form.forgetPassword': 'Forgot password',
   'login.form.login': 'login',
   'login.form.register': 'register account',
-  'login.banner.slogan': 'Out-of-the-box high-quality admin manager system',
-  'login.banner.subSlogan': 'Flexible, fast and efficient development',
 };

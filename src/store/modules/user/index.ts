@@ -18,6 +18,8 @@ const useUserStore = defineStore('user', {
     avatar: undefined,
     email: undefined,
     phone: undefined,
+    login_time: undefined,
+    login_ip: undefined,
     role: '',
     roles: [],
   }),
