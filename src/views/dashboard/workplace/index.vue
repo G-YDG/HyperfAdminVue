@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <HaBreadcrumb :items="['menu.dashboard.workplace']" />
+
     <a-card class="card-info" :bordered="false">
       <div class="justify-between">
         <div>
