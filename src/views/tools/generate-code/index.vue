@@ -11,23 +11,17 @@
         :table-data-api="index"
       >
         <template #operations="{ record }">
-          <a-button type="text" size="small" @click="previewModal(record)">
+          <a-button type="text" size="small" @click="openPreviewModal(record)">
             {{ $t(`searchTable.operation.preview`) }}
           </a-button>
         </template>
       </HaTableData>
     </a-card>
 
-    <a-modal v-model:visible="formVisible" :on-before-ok="onPreview">
-      <HaForm
-        :form-model="formModel"
-        :form-config="formConfig"
-        :is-show-submit-btn="false"
-      />
-    </a-modal>
-  </div>
+    <DataForm ref="dataFormRef" @submit="onPreviewCode" />
 
-  <preview ref="previewRef" />
+    <PreviewCode ref="previewRef" />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -35,11 +29,13 @@
   import { useI18n } from 'vue-i18n';
   import { index } from '@/api/tools/generate-code';
   import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
-  import preview from '@/views/tools/generate-code/components/preview.vue';
+  import PreviewCode from '@/views/tools/generate-code/components/preview-code.vue';
+  import DataForm from '@/views/tools/generate-code/components/data-form.vue';
 
   const { t } = useI18n();
 
   const previewRef = ref();
+  const dataFormRef = ref();
 
   const tableRef = ref();
   const tableColumns = computed<TableColumnData[]>(() => [
@@ -62,37 +58,11 @@
     },
   ]);
 
-  const formVisible = ref(false);
-  const formModel = ref({
-    module: '',
-    name: '',
-  });
-  const formConfig = ref([
-    {
-      key: 'module',
-      type: 'a-input',
-      label: t('generateCode.from.module'),
-      placeholder: t('generateCode.from.module.placeholder'),
-      allowClear: true,
-    },
-    {
-      key: 'name',
-      type: 'a-input',
-      disabled: true,
-      label: t('generateCode.from.name'),
-      placeholder: t('generateCode.from.name.placeholder'),
-    },
-  ]);
-
-  const previewModal = (record: any) => {
-    formVisible.value = true;
-    formModel.value.module = 'System';
-    formModel.value.name = record.Name;
+  const openPreviewModal = (record: any) => {
+    dataFormRef.value.open({ module: 'System', name: record.Name });
   };
 
-  const onPreview = () => {
-    return previewRef.value.open(formModel.value);
+  const onPreviewCode = (record: any) => {
+    previewRef.value.open(record);
   };
 </script>
-
-<style scoped lang="less"></style>

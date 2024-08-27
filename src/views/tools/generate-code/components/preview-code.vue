@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model:visible="visible" width="1000px" :footer="false">
+  <a-modal v-model:visible="visible" width="80%" :footer="false">
     <template #title>预览代码</template>
     <a-tabs v-model:active-key="activeTab">
       <a-tab-pane

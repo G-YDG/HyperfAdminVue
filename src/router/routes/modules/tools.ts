@@ -8,15 +8,16 @@ const TOOLS: AppRouteRecordRaw = {
   meta: {
     locale: 'menu.tools',
     requiresAuth: true,
-    icon: 'icon-tools',
+    icon: 'icon-user',
     order: 0,
   },
   children: [
     {
       path: 'generateCode',
-      name: 'GenerateCode',
+      name: 'ToolsGenerateCode',
       component: () => import('@/views/tools/generate-code/index.vue'),
       meta: {
+        icon: 'icon-user',
         locale: 'menu.tools.generateCode',
         requiresAuth: true,
         roles: ['*'],
