@@ -22,18 +22,8 @@
   const { t } = useI18n();
   const carouselItem = computed(() => [
     {
-      slogan: t('login.banner.slogan1'),
-      subSlogan: t('login.banner.subSlogan1'),
-      image: bannerImage,
-    },
-    {
-      slogan: t('login.banner.slogan2'),
-      subSlogan: t('login.banner.subSlogan2'),
-      image: bannerImage,
-    },
-    {
-      slogan: t('login.banner.slogan3'),
-      subSlogan: t('login.banner.subSlogan3'),
+      slogan: t('login.banner.slogan'),
+      subSlogan: t('login.banner.subSlogan'),
       image: bannerImage,
     },
   ]);

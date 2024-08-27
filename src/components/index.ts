@@ -9,8 +9,9 @@ import {
   DataZoomComponent,
   GraphicComponent,
 } from 'echarts/components';
-import Chart from './chart/index.vue';
-import Breadcrumb from './breadcrumb/index.vue';
+import HaChart from './ha-chart/index.vue';
+import HaBreadcrumb from './ha-breadcrumb/index.vue';
+import HaLogo from './ha-logo/index.vue';
 import HaForm from './ha-form/index.vue';
 import HaSearch from './ha-search/index.vue';
 import HaTableData from './ha-table-data/index.vue';
@@ -33,8 +34,9 @@ use([
 
 export default {
   install(Vue: App) {
-    Vue.component('Chart', Chart);
-    Vue.component('Breadcrumb', Breadcrumb);
+    Vue.component('HaChart', HaChart);
+    Vue.component('HaBreadcrumb', HaBreadcrumb);
+    Vue.component('HaLogo', HaLogo);
     Vue.component('HaForm', HaForm);
     Vue.component('HaSearch', HaSearch);
     Vue.component('HaTableData', HaTableData);

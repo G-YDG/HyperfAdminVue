@@ -1,27 +1,21 @@
 <template>
   <div class="login-container">
     <div class="logo">
-      <img
-        alt="logo"
-        src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image"
-      />
-      <div class="logo-text">Arco Design Pro</div>
+      <HaLogo />
     </div>
-    <LoginBanner />
     <div class="content">
       <div class="content-inner">
         <LoginForm />
       </div>
-      <div class="footer">
-        <Footer />
-      </div>
+    </div>
+    <div class="footer">
+      <HaFooter />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import Footer from '@/components/footer/index.vue';
-  import LoginBanner from './components/banner.vue';
+  import HaFooter from '@/components/ha-footer/index.vue';
   import LoginForm from './components/login-form.vue';
 </script>
 
@@ -29,19 +23,16 @@
   .login-container {
     display: flex;
     height: 100vh;
-
-    .banner {
-      width: 550px;
-      background: linear-gradient(163.85deg, #1d2129 0%, #00308f 100%);
-    }
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(163.85deg, var(--color-bg-5) 0%, #0039ab 100%);
 
     .content {
+      background: var(--color-bg-5);
+      border-radius: 20px;
       position: relative;
       display: flex;
-      flex: 1;
-      align-items: center;
-      justify-content: center;
-      padding-bottom: 40px;
+      padding: 40px;
     }
 
     .footer {
@@ -49,6 +40,7 @@
       right: 0;
       bottom: 0;
       width: 100%;
+      color: var(--color-text-4);
     }
   }
 
@@ -59,13 +51,6 @@
     z-index: 1;
     display: inline-flex;
     align-items: center;
-
-    &-text {
-      margin-right: 4px;
-      margin-left: 4px;
-      color: var(--color-fill-1);
-      font-size: 20px;
-    }
   }
 </style>
 

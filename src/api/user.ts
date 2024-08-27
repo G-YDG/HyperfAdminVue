@@ -11,11 +11,11 @@ export interface LoginRes {
   token: string;
 }
 export function login(data: LoginData) {
-  return axios.post<LoginRes>('/system/user/login', data);
+  return axios.post<LoginRes>('/system/login', data);
 }
 
 export function logout() {
-  return axios.post<LoginRes>('/system/user/logout');
+  return axios.post<LoginRes>('/system/logout');
 }
 
 export function getUserInfo() {

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!--    面包屑-->
-    <Breadcrumb :items="['menu.dashboard.userInfo']" />
+    <HaBreadcrumb :items="['menu.dashboard.userInfo']" />
 
     <!--    用户基础信息-->
     <a-card class="general-card user-header rounded-sm text-center">

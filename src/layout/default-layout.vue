@@ -1,7 +1,7 @@
 <template>
   <a-layout class="layout" :class="{ mobile: appStore.hideMenu }">
     <div v-if="navbar" class="layout-navbar">
-      <NavBar />
+      <HaNavBar />
     </div>
     <a-layout>
       <a-layout>
@@ -18,7 +18,7 @@
           @collapse="setCollapsed"
         >
           <div class="menu-wrapper">
-            <Menu />
+            <HaMenu />
           </div>
         </a-layout-sider>
         <a-drawer
@@ -30,14 +30,14 @@
           :closable="false"
           @cancel="drawerCancel"
         >
-          <Menu />
+          <HaMenu />
         </a-drawer>
         <a-layout class="layout-content" :style="paddingStyle">
-          <TabBar v-if="appStore.tabBar" />
+          <HaTabBar v-if="appStore.tabBar" />
           <a-layout-content>
             <PageLayout />
           </a-layout-content>
-          <Footer v-if="footer" />
+          <HaFooter v-if="footer" />
         </a-layout>
       </a-layout>
     </a-layout>
@@ -48,10 +48,10 @@
   import { ref, computed, watch, provide, onMounted } from 'vue';
   import { useRouter, useRoute } from 'vue-router';
   import { useAppStore, useUserStore } from '@/store';
-  import NavBar from '@/components/navbar/index.vue';
-  import Menu from '@/components/menu/index.vue';
-  import Footer from '@/components/footer/index.vue';
-  import TabBar from '@/components/tab-bar/index.vue';
+  import HaNavBar from '@/components/ha-navbar/index.vue';
+  import HaMenu from '@/components/ha-menu/index.vue';
+  import HaFooter from '@/components/ha-footer/index.vue';
+  import HaTabBar from '@/components/ha-tab-bar/index.vue';
   import usePermission from '@/hooks/permission';
   import useResponsive from '@/hooks/responsive';
   import PageLayout from './page-layout.vue';

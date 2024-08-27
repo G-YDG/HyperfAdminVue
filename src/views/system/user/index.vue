@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['menu.system', 'menu.system.user']" />
+    <HaBreadcrumb :items="['menu.system', 'menu.system.user']" />
 
     <a-card class="general-card" :title="$t('searchTable.title')">
       <HaTableData

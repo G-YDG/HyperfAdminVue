@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!--    面包屑-->
-    <Breadcrumb :items="['menu.system', 'menu.system.menu']" />
+    <HaBreadcrumb :items="['menu.system', 'menu.system.menu']" />
 
     <!--    卡片内容-->
     <a-card class="general-card" :title="$t('menu.system.menu')">

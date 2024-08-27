@@ -7,7 +7,7 @@ import localeSettings from './en-US/settings';
 import localeSearch from './en-US/search';
 
 export default {
-  'website.title': 'Arco Pro',
+  'website.title': 'Hyperf Admin',
   'navbar.docs': 'Docs',
   'navbar.action.locale': 'Switch to English',
   'navbar.userInfo': 'User Info',

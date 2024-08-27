@@ -7,7 +7,7 @@ import localeSettings from './zh-CN/settings';
 import localeSearch from './zh-CN/search';
 
 export default {
-  'website.title': 'Arco Pro',
+  'website.title': 'Hyperf Admin',
   'navbar.docs': '文档中心',
   'navbar.action.locale': '切换为中文',
   'navbar.userInfo': '个人信息',
