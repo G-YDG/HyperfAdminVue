@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!--    面包屑-->
-    <Breadcrumb :items="['menu.system', 'menu.tools.generateCode']" />
+    <Breadcrumb :items="['menu.tools', 'menu.tools.generateCode']" />
 
     <!--    卡片内容-->
     <a-card class="general-card" :title="$t('menu.tools.generateCode')">

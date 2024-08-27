@@ -5,25 +5,10 @@
 
     <!--    用户基础信息-->
     <a-card class="general-card user-header rounded-sm text-center">
-      <div class="avatar-box mx-auto pt-20">
-        <a-upload
-          :action="uploadFileUrl"
-          :headers="uploadFileHeaders"
-          :show-file-list="false"
-          @change="handleUrlChange"
-        >
-          <template #upload-button>
-            <div>
-              <a-avatar :size="100" :image-url="userInfoForm.avatar"></a-avatar>
-            </div>
-          </template>
-        </a-upload>
-      </div>
-      <div>
-        <a-tag size="large" class="mt-10 rounded-full" color="#165dff">
-          {{ userInfoForm.nickname }}
-        </a-tag>
-      </div>
+      <UserHeaderInfo
+        :user-info="userInfoForm"
+        @on-change-success="onUserAvatarUrlChange"
+      />
     </a-card>
 
     <a-layout-content class="mt-10">
@@ -61,8 +46,8 @@
   import { modifyPassword, updateInfo } from '@/api/user';
   import { useUserStore } from '@/store';
   import useUser from '@/hooks/user';
-  import { getUploadHeaders, getUploadUrl } from '@/utils/upload';
   import { useI18n } from 'vue-i18n';
+  import UserHeaderInfo from '@/views/dashboard/user-info/components/user-header-info.vue';
 
   const { t } = useI18n();
 
@@ -139,24 +124,9 @@
     },
   ]);
 
-  // 图片上传
-  const uploadFileUrl = getUploadUrl();
-  const uploadFileHeaders = getUploadHeaders();
-
-  const handleUrlChange = (_, currentFile) => {
-    if (currentFile.status === 'error') {
-      Message.error('上传失败');
-    }
-    if (currentFile.status === 'done') {
-      if (currentFile.response.code === 200) {
-        userInfoForm.value.avatar = currentFile.response.data.url;
-        userStore.$state.avatar = currentFile.response.data.url;
-        handModifyInfo();
-      } else {
-        userInfoForm.value.avatar = userStore.$state.avatar;
-        Message.error(currentFile.response.msg);
-      }
-    }
+  const onUserAvatarUrlChange = () => {
+    userStore.$state.avatar = userInfoForm.value.avatar;
+    handModifyInfo();
   };
 
   const handModifyInfo = async () => {
