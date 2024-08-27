@@ -1,3 +1,4 @@
+import localeTools from '@/views/tools/locale/zh-CN';
 import localeSystem from '@/views/system/locale/zh-CN';
 import localeLogin from '@/views/login/locale/zh-CN';
 import localeDashboard from '@/views/dashboard/locale/zh-CN';
@@ -18,4 +19,5 @@ export default {
   ...localeLogin,
   ...localeDashboard,
   ...localeSystem,
+  ...localeTools,
 };

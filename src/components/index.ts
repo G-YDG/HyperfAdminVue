@@ -14,6 +14,7 @@ import Breadcrumb from './breadcrumb/index.vue';
 import HaForm from './ha-form/index.vue';
 import HaSearch from './ha-search/index.vue';
 import HaTableData from './ha-table-data/index.vue';
+import HaCodeEditor from './ha-code-editor/index.vue';
 
 // Manually introduce ECharts modules to reduce packing size
 
@@ -37,5 +38,6 @@ export default {
     Vue.component('HaForm', HaForm);
     Vue.component('HaSearch', HaSearch);
     Vue.component('HaTableData', HaTableData);
+    Vue.component('HaCodeEditor', HaCodeEditor);
   },
 };

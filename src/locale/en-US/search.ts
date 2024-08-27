@@ -20,6 +20,7 @@ export default {
   'searchTable.operation.menu': 'Menu',
   'searchTable.operation.copy': 'Copy',
   'searchTable.operation.save': 'Save',
+  'searchTable.operation.preview': 'Preview',
   // actions
   'searchTable.actions.columnSetting': 'ColumnSetting',
   'searchTable.actions.refresh': 'Refresh',

@@ -26,7 +26,7 @@
         </component>
       </a-form-item>
     </a-col>
-    <a-col>
+    <a-col v-if="isShowSubmitBtn">
       <a-form-item :label-col-flex="labelColFlex">
         <a-button html-type="submit" type="primary">
           {{ $t(`searchTable.operation.save`) }}
@@ -52,6 +52,12 @@
         return [];
       },
     },
+    isShowSubmitBtn: {
+      type: Boolean,
+      default: () => {
+        return true;
+      },
+    },
     labelColFlex: {
       type: String,
       default: () => {
@@ -62,6 +68,7 @@
 
   const formModel = ref(props.formModel);
   const formConfig = ref(props.formConfig);
+  const isShowSubmitBtn = ref(props.isShowSubmitBtn);
   const labelColFlex = ref(props.labelColFlex);
 
   const emit = defineEmits(['submit']);

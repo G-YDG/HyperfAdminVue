@@ -1,3 +1,4 @@
+import localeTools from '@/views/tools/locale/en-US';
 import localeSystem from '@/views/system/locale/en-US';
 import localeLogin from '@/views/login/locale/en-US';
 import localeDashboard from '@/views/dashboard/locale/en-US';
@@ -18,4 +19,5 @@ export default {
   ...localeLogin,
   ...localeDashboard,
   ...localeSystem,
+  ...localeTools,
 };
