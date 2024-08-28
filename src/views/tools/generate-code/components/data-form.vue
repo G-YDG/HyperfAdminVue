@@ -1,5 +1,9 @@
 <template>
-  <a-modal v-model:visible="formVisible" :on-before-ok="submit">
+  <a-modal
+    v-model:visible="formVisible"
+    :title="$t('generateCode.previewCode')"
+    :on-before-ok="submit"
+  >
     <a-form :model="formModel">
       <a-form-item field="module" :label="$t('generateCode.from.module')">
         <a-input

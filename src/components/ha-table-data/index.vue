@@ -145,13 +145,21 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, reactive, computed } from 'vue';
+  import { ref, reactive, computed, watch } from 'vue';
   import { Pagination, SizeProps } from '@/types/global';
   import { Message } from '@arco-design/web-vue';
   import { useI18n } from 'vue-i18n';
   import useLoading from '@/hooks/loading';
 
+  const emit = defineEmits(['fetchTableData']);
+
   const props = defineProps({
+    loading: {
+      type: Boolean,
+      default: () => {
+        return false;
+      },
+    },
     searchModel: {
       type: Object,
       default: () => {
@@ -170,11 +178,15 @@
         return [];
       },
     },
+    tableData: {
+      type: Array,
+      default: () => {
+        return [];
+      },
+    },
     tableDataApi: {
       type: Function,
-      default: () => {
-        return undefined;
-      },
+      default: undefined,
     },
     tablePageSize: {
       type: Number,
@@ -216,8 +228,8 @@
     },
   ]);
   // 表格
-  const { loading, setLoading } = useLoading(true);
-  const tableData = ref<[]>([]);
+  const { loading, setLoading } = useLoading(props.loading);
+  const tableData = ref(props.tableData);
   const tableDataApi = ref(props.tableDataApi);
   const tableColumns = ref(props.tableColumns);
   const tablePageSize = ref(props.tablePageSize);
@@ -233,12 +245,15 @@
   const fetchTableData = async (params: object) => {
     setLoading(true);
     try {
-      const { data } = await tableDataApi.value(params);
-      tableData.value = data.items;
-      if (data.pageInfo !== undefined) {
-        tablePagination.current = data.pageInfo.currentPage;
-        tablePagination.total = data.pageInfo.total;
+      if (tableDataApi.value !== undefined) {
+        const { data } = await tableDataApi.value(params);
+        tableData.value = data.items;
+        if (data.pageInfo !== undefined) {
+          tablePagination.current = data.pageInfo.currentPage;
+          tablePagination.total = data.pageInfo.total;
+        }
       }
+      emit('fetchTableData', params);
     } catch (err) {
       Message.error('获取数据失败');
     } finally {
@@ -274,6 +289,20 @@
   const refresh = () => {
     search();
   };
+
+  watch(
+    () => props.loading,
+    () => {
+      loading.value = props.loading;
+    }
+  );
+
+  watch(
+    () => props.tableData,
+    () => {
+      tableData.value = props.tableData;
+    }
+  );
 
   defineExpose({ refresh });
 </script>

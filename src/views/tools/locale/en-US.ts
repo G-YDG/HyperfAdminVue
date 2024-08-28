@@ -8,4 +8,5 @@ export default {
   'generateCode.from.comment.placeholder': 'Please enter table comment',
   'generateCode.from.module': 'Module',
   'generateCode.from.module.placeholder': 'Please enter module name',
+  'generateCode.previewCode': 'PreviewCode',
 };

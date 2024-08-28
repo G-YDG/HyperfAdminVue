@@ -7,8 +7,12 @@
     <a-card class="general-card" :title="$t('menu.tools.generateCode')">
       <HaTableData
         ref="tableRef"
+        :loading="loading"
+        :search-model="searchModel"
+        :search-config="searchConfig"
         :table-columns="tableColumns"
-        :table-data-api="index"
+        :table-data="tableData"
+        @fetch-table-data="fetchTableData"
       >
         <template #operations="{ record }">
           <a-button type="text" size="small" @click="openPreviewModal(record)">
@@ -31,13 +35,29 @@
   import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
   import PreviewCode from '@/views/tools/generate-code/components/preview-code.vue';
   import DataForm from '@/views/tools/generate-code/components/data-form.vue';
+  import useLoading from '@/hooks/loading';
 
   const { t } = useI18n();
 
+  const { loading, setLoading } = useLoading(true);
+
   const previewRef = ref();
   const dataFormRef = ref();
-
   const tableRef = ref();
+  const tableData = ref([]);
+
+  const searchModel = ref({
+    name: '',
+  });
+  const searchConfig = computed<Record<string, any>[]>(() => [
+    {
+      key: 'name',
+      type: 'a-input',
+      label: t('generateCode.from.name'),
+      placeholder: t('generateCode.from.name.placeholder'),
+    },
+  ]);
+
   const tableColumns = computed<TableColumnData[]>(() => [
     {
       title: t(`generateCode.from.name`),
@@ -57,6 +77,19 @@
       slotName: 'operations',
     },
   ]);
+
+  const fetchTableData = async () => {
+    setLoading(true);
+    const { data } = await index();
+    if (searchModel.value.name !== '') {
+      tableData.value = data.items.filter((item: any) =>
+        item.Name.includes(searchModel.value.name)
+      );
+    } else {
+      tableData.value = data.items;
+    }
+    setLoading(false);
+  };
 
   const openPreviewModal = (record: any) => {
     dataFormRef.value.open({ module: 'System', name: record.Name });

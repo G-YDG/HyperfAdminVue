@@ -1,6 +1,6 @@
 <template>
   <a-modal v-model:visible="visible" width="80%" :footer="false">
-    <template #title>预览代码</template>
+    <template #title>{{ $t('generateCode.previewCode') }}</template>
     <a-tabs v-model:active-key="activeTab">
       <a-tab-pane
         v-for="item in previewCode"
