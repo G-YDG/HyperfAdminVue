@@ -70,6 +70,10 @@
     {
       title: t('searchTable.columns.createdAt'),
       dataIndex: 'Create_time',
+      sortable: {
+        sortDirections: ['ascend', 'descend'],
+        defaultSortOrder: 'descend',
+      },
     },
     {
       title: t('searchTable.columns.operations'),
