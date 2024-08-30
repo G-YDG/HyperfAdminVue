@@ -106,6 +106,7 @@
     :data="tableData"
     :size="tableSize"
     @page-change="onTablePageChange"
+    @sorter-change="onTableSortChange"
   >
     <template #columns>
       <a-table-column
@@ -277,7 +278,22 @@
   };
 
   const onTablePageChange = (page: number) => {
-    fetchTableData({ ...tablePagination, page });
+    fetchTableData({
+      ...{ page, pageSize: tablePagination.pageSize },
+      ...searchModel.value,
+    });
+  };
+
+  const onTableSortChange = async (dataIndex: string, direction: string) => {
+    if (direction) {
+      searchModel.value.orderBy = dataIndex;
+      searchModel.value.orderType = direction;
+    } else {
+      searchModel.value.orderBy = '';
+      searchModel.value.orderType = '';
+    }
+    tablePagination.page = 1;
+    search();
   };
 
   const onSelectDensity = (
@@ -294,6 +310,13 @@
     () => props.loading,
     () => {
       loading.value = props.loading;
+    }
+  );
+
+  watch(
+    () => props.searchModel,
+    () => {
+      searchModel.value = props.searchModel;
     }
   );
 
