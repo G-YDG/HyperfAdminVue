@@ -2,8 +2,8 @@ import axios from 'axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Message } from '@arco-design/web-vue';
 import { getToken } from '@/utils/auth';
-import Router from '@/router';
 import { throttle } from '@/utils/tools';
+import { useUserStore } from '@/store';
 
 export interface HttpResponse<T = unknown> {
   status: number;
@@ -38,7 +38,9 @@ axios.interceptors.request.use(
 );
 
 const reLogin = throttle(() => {
-  Router.push({ name: 'login' });
+  const userStore = useUserStore();
+  userStore.logout();
+  window.location.reload();
 }, 2000);
 
 axios.interceptors.response.use(
