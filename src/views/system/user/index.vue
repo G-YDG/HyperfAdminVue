@@ -27,6 +27,14 @@
           </a-button>
         </template>
 
+        <template #tableSettingSettingRight>
+          <a-tooltip :content="$t('searchTable.actions.export')">
+            <div class="action-icon" @click="onExport">
+              <icon-export size="18" />
+            </div>
+          </a-tooltip>
+        </template>
+
         <template #status="{ record }">
           <span v-if="record.status === 1" class="circle success"></span>
           <span v-else class="circle fail"></span>
@@ -70,6 +78,8 @@
   import type { SelectOptionData } from '@arco-design/web-vue/es/select/interface';
   import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
   import DataForm from '@/views/system/user/components/data-form.vue';
+  import { downloadByBlobResponse } from '@/utils/file';
+  import axios from 'axios';
 
   const { t } = useI18n();
 
@@ -169,6 +179,20 @@
 
   const openEditeModal = (record: RoleModel) => {
     dataFormRef.value.edite(record);
+  };
+
+  // 导出
+  const onExport = async () => {
+    try {
+      await axios
+        .get(`/system/user/export`, { responseType: 'blob' })
+        .then((response: any) => {
+          downloadByBlobResponse(response);
+          Message.success('导出成功');
+        });
+    } catch (err) {
+      Message.error('导出失败');
+    }
   };
 
   // 删除

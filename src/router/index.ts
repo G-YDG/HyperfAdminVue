@@ -13,7 +13,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: 'login',
+      redirect: 'dashboard/workplace', // 默认跳转路径
     },
     {
       path: '/login',
