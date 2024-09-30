@@ -38,11 +38,12 @@ export function downloadByBlobResponse(
 ) {
   if (!filename) {
     const matches = response.headers['content-disposition'].match(
-      /filename\*=utf-8''(.+)/gi
+      /filename\*=UTF-8''(.+)/gi
     );
-    filename = matches
-      ? matches[0].replace(/filename\*=utf-8''/gi, '')
-      : 'file';
+    filename = matches ? matches[0].replace(/filename\*=UTF-8''/gi, '') : null;
+    if (filename) {
+      filename = decodeURIComponent(filename);
+    }
   }
   if (!mime) {
     mime = response.headers['content-type'].replace(';charset=utf8', '');

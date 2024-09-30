@@ -30,7 +30,7 @@
         <template #tableSettingSettingRight>
           <a-tooltip :content="$t('searchTable.actions.export')">
             <div class="action-icon" @click="onExport">
-              <icon-export size="18" />
+              <icon-export size="18" :spin="iconExportSpin" />
             </div>
           </a-tooltip>
         </template>
@@ -182,7 +182,9 @@
   };
 
   // 导出
+  const iconExportSpin = ref(false);
   const onExport = async () => {
+    iconExportSpin.value = true;
     try {
       await axios
         .get(`/system/user/export`, { responseType: 'blob' })
@@ -192,6 +194,8 @@
         });
     } catch (err) {
       Message.error('导出失败');
+    } finally {
+      iconExportSpin.value = false;
     }
   };
 
