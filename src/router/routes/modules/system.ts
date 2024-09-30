@@ -17,7 +17,6 @@ const SYSTEM: AppRouteRecordRaw = {
       name: 'SystemUser',
       component: () => import('@/views/system/user/index.vue'),
       meta: {
-        icon: 'icon-user',
         locale: 'menu.system.user',
         requiresAuth: true,
         roles: ['*'],
@@ -28,7 +27,6 @@ const SYSTEM: AppRouteRecordRaw = {
       name: 'SystemRole',
       component: () => import('@/views/system/role/index.vue'),
       meta: {
-        icon: 'icon-user',
         locale: 'menu.system.role',
         requiresAuth: true,
         roles: ['*'],
@@ -39,11 +37,32 @@ const SYSTEM: AppRouteRecordRaw = {
       name: 'SystemMenu',
       component: () => import('@/views/system/menu/index.vue'),
       meta: {
-        icon: 'icon-user',
         locale: 'menu.system.menu',
         requiresAuth: true,
         roles: ['*'],
       },
+    },
+    {
+      path: 'logs',
+      name: 'SystemLogs',
+      component: '',
+      meta: {
+        locale: 'menu.system.logs',
+        requiresAuth: true,
+        roles: ['*'],
+      },
+      children: [
+        {
+          path: 'login',
+          name: 'SystemLoginLogs',
+          component: () => import('@/views/system/logs/login-log/index.vue'),
+          meta: {
+            locale: 'menu.system.logs.login',
+            requiresAuth: true,
+            roles: ['*'],
+          },
+        },
+      ],
     },
   ],
 };

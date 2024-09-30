@@ -16,7 +16,7 @@
           :prop="config.key"
           :field="config.key"
           :label="config.label"
-          label-col-flex="60px"
+          label-col-flex="90px"
         >
           <slot
             v-if="config.useSlot"
@@ -41,7 +41,7 @@
   </a-form>
 
   <!--  搜索按钮&刷新按钮 -->
-  <a-col v-if="searchConfig.length > 0" style="margin: 5px 76px">
+  <a-col v-if="searchConfig.length > 0" style="margin: 5px 105px">
     <a-space :size="16">
       <a-button type="primary" @click="search">
         <template #icon>
@@ -60,6 +60,33 @@
 
   <!--      分割线-->
   <a-divider style="margin-top: 0" />
+
+  <!--      数据汇总-->
+  <a-card
+    v-if="tableSummaryColumns.length > 0"
+    class="data-statistics-container"
+    :loading="summaryLoading"
+    :bordered="false"
+  >
+    <a-row class="data-statistics-row">
+      <a-col
+        v-for="(item, index) in tableSummaryColumns"
+        :key="index"
+        class="data-statistics-col"
+        :xs="20"
+        :sm="14"
+        :md="8"
+        :lg="6"
+        :xl="6"
+        :xxl="4"
+      >
+        <a-card class="data-statistics-card" :bordered="false" hoverable>
+          <div class="label">{{ item.label }}</div>
+          <div class="value">{{ tableSummaryData[item.key] }}</div>
+        </a-card>
+      </a-col>
+    </a-row>
+  </a-card>
 
   <!--      表格设置-->
   <a-row class="table-setting">
@@ -148,11 +175,13 @@
 <script lang="ts" setup>
   import { ref, reactive, computed, watch } from 'vue';
   import { Pagination, SizeProps } from '@/types/global';
-  import { Message } from '@arco-design/web-vue';
   import { useI18n } from 'vue-i18n';
-  import useLoading from '@/hooks/loading';
 
-  const emit = defineEmits(['fetchTableData']);
+  const emit = defineEmits([
+    'fetchTableData',
+    'fetchTableSummaryData',
+    'reset',
+  ]);
 
   const props = defineProps({
     loading: {
@@ -172,6 +201,28 @@
       default: () => {
         return [];
       },
+    },
+    summaryLoading: {
+      type: Boolean,
+      default: () => {
+        return false;
+      },
+    },
+    tableSummaryColumns: {
+      type: Array,
+      default: () => {
+        return [];
+      },
+    },
+    tableSummaryData: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
+    tableSummaryDataApi: {
+      type: Function,
+      default: undefined,
     },
     tableColumns: {
       type: Array,
@@ -229,12 +280,18 @@
     },
   ]);
   // 表格
-  const { loading, setLoading } = useLoading(props.loading);
+  const loading = ref(props.loading);
   const tableData = ref(props.tableData);
   const tableDataApi = ref(props.tableDataApi);
   const tableColumns = ref(props.tableColumns);
   const tablePageSize = ref(props.tablePageSize);
   const showTablePagination = ref(props.showTablePagination);
+
+  // 表格汇总
+  const summaryLoading = ref(props.summaryLoading);
+  const tableSummaryData = ref(props.tableSummaryData);
+  const tableSummaryColumns = ref(props.tableSummaryColumns);
+  const tableSummaryDataApi = ref(props.tableSummaryDataApi);
 
   // 分页
   const basePagination: Pagination = {
@@ -243,8 +300,23 @@
   };
   const tablePagination = reactive({ ...basePagination });
 
+  const fetchTableSummaryData = async (params: object) => {
+    summaryLoading.value = true;
+    try {
+      if (tableSummaryDataApi.value !== undefined) {
+        const { data } = await tableSummaryDataApi.value(params);
+        tableSummaryData.value = data;
+      }
+      emit('fetchTableSummaryData', params);
+    } catch (err) {
+      // you can report use errorHandler or other
+    } finally {
+      summaryLoading.value = false;
+    }
+  };
+
   const fetchTableData = async (params: object) => {
-    setLoading(true);
+    loading.value = true;
     try {
       if (tableDataApi.value !== undefined) {
         const { data } = await tableDataApi.value(params);
@@ -256,15 +328,18 @@
       }
       emit('fetchTableData', params);
     } catch (err) {
-      Message.error('获取数据失败');
+      // you can report use errorHandler or other
     } finally {
-      setLoading(false);
+      loading.value = false;
     }
   };
 
   const search = () => {
     fetchTableData({
       ...{ page: basePagination.page, pageSize: basePagination.pageSize },
+      ...searchModel.value,
+    } as unknown as object);
+    fetchTableSummaryData({
       ...searchModel.value,
     } as unknown as object);
   };
@@ -274,6 +349,7 @@
     Object.keys(searchModel.value).forEach((key) => {
       searchModel.value[key] = '';
     });
+    emit('reset');
     search();
   };
 
@@ -332,7 +408,7 @@
 
 <style scoped lang="less">
   .table-setting {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     .table-setting-col {
       display: flex;
       align-items: center;
@@ -342,6 +418,31 @@
     }
     .right {
       justify-content: end;
+    }
+  }
+
+  .data-statistics-container {
+    .data-statistics-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .data-statistics-card {
+      background-color: var(--color-neutral-2);
+    }
+    .data-statistics-col {
+      flex: 1;
+      margin: 4px;
+      line-height: 1.6;
+      .label {
+        color: var(--color-text-2);
+        font-size: 16px;
+      }
+      .value {
+        color: var(--color-text-2);
+        font-size: 30px;
+        font-weight: bold;
+      }
     }
   }
 </style>
