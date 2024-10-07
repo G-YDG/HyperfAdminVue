@@ -2,6 +2,7 @@ export default {
   'menu.tools': 'Tools Manager',
   'menu.tools.generateCode': 'Generate Code',
 
+  'generateCode.from.datasource': 'Datasource',
   'generateCode.from.name': 'TableName',
   'generateCode.from.name.placeholder': 'Please enter table name',
   'generateCode.from.comment': 'TableComment',

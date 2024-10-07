@@ -2,6 +2,7 @@ export default {
   'menu.tools': '工具管理',
   'menu.tools.generateCode': '代码生成',
 
+  'generateCode.from.datasource': '数据源',
   'generateCode.from.name': '表名',
   'generateCode.from.name.placeholder': '请输入表名',
   'generateCode.from.comment': '表注释',

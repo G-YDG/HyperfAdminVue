@@ -32,6 +32,7 @@
     formVisible.value = true;
     formModel.value.module = params.module || 'System';
     formModel.value.name = params.name || '';
+    formModel.value.datasource = params.datasource || '';
   };
 
   const emit = defineEmits(['submit']);

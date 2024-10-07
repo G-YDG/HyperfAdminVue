@@ -7,13 +7,19 @@
     <a-card class="general-card" :title="$t('menu.tools.generateCode')">
       <HaTableData
         ref="tableRef"
-        :loading="loading"
         :search-model="searchModel"
         :search-config="searchConfig"
         :table-columns="tableColumns"
-        :table-data="tableData"
-        @fetch-table-data="fetchTableData"
+        :table-data-api="index"
       >
+        <template #searchDatasource>
+          <a-select
+            v-model="searchModel.datasource"
+            :options="datasourceOptions"
+            :placeholder="$t('searchTable.form.select')"
+          />
+        </template>
+
         <template #operations="{ record }">
           <a-button type="text" size="small" @click="openPreviewModal(record)">
             {{ $t(`searchTable.operation.preview`) }}
@@ -29,27 +35,30 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref } from 'vue';
+  import { computed, ref, onMounted } from 'vue';
   import { useI18n } from 'vue-i18n';
-  import { index } from '@/api/tools/generate-code';
+  import { index, datasource } from '@/api/tools/generate-code';
   import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
   import PreviewCode from '@/views/tools/generate-code/components/preview-code.vue';
   import DataForm from '@/views/tools/generate-code/components/data-form.vue';
-  import useLoading from '@/hooks/loading';
+  import type { SelectOptionData } from '@arco-design/web-vue/es/select/interface';
 
   const { t } = useI18n();
-
-  const { loading, setLoading } = useLoading(true);
 
   const previewRef = ref();
   const dataFormRef = ref();
   const tableRef = ref();
-  const tableData = ref([]);
 
   const searchModel = ref({
     name: '',
+    datasource: '',
   });
   const searchConfig = computed<Record<string, any>[]>(() => [
+    {
+      label: t('generateCode.from.datasource'),
+      useSlot: true,
+      slotName: 'searchDatasource',
+    },
     {
       key: 'name',
       type: 'a-input',
@@ -82,24 +91,25 @@
     },
   ]);
 
-  const fetchTableData = async () => {
-    setLoading(true);
-    const { data } = await index();
-    if (searchModel.value.name !== '') {
-      tableData.value = data.items.filter((item: any) =>
-        item.Name.includes(searchModel.value.name)
-      );
-    } else {
-      tableData.value = data.items;
-    }
-    setLoading(false);
-  };
-
   const openPreviewModal = (record: any) => {
-    dataFormRef.value.open({ module: 'System', name: record.Name });
+    dataFormRef.value.open({
+      module: 'System',
+      name: record.Name,
+      datasource: searchModel.value.datasource,
+    });
   };
 
   const onPreviewCode = (record: any) => {
     previewRef.value.open(record);
   };
+
+  const datasourceOptions = ref<SelectOptionData[]>([]);
+  const fetchDatasourceOptions = async () => {
+    const { data } = await datasource();
+    datasourceOptions.value = data;
+  };
+
+  onMounted(() => {
+    fetchDatasourceOptions();
+  });
 </script>
