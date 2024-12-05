@@ -151,7 +151,7 @@
   const fetchConfigGroupOptions = async () => {
     try {
       const { data } = await list();
-      configGroupOptions.value = data.items.map((item: any) => ({
+      configGroupOptions.value = data.map((item: any) => ({
         label: item.name,
         value: item.id,
       }));
