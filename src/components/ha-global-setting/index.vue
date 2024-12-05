@@ -70,6 +70,8 @@
     },
   ]);
 
+  appStore.fetchServerWebsiteSetting();
+
   const cancel = () => {
     appStore.updateSettings({ globalSettings: false });
     emit('cancel');

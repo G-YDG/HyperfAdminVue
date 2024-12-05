@@ -2,11 +2,13 @@
   <div class="ha-logo">
     <img
       class="logo"
+      width="33"
+      height="33"
       alt="logo"
-      src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image"
+      :src="appStore.websiteSetting.WEBSITE_SETTING_LOGO"
     />
     <span v-if="appStore.device !== 'mobile'" class="title">
-      {{ $t('website.title') }}
+      {{ appStore.websiteSetting.WEBSITE_SETTING_TITLE }}
     </span>
   </div>
 </template>

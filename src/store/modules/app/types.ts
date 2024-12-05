@@ -1,5 +1,14 @@
 import type { RouteRecordNormalized } from 'vue-router';
 
+export interface WebsiteSetting {
+  WEBSITE_SETTING_TITLE: string;
+  WEBSITE_SETTING_LOGO: string;
+  WEBSITE_SETTING_RECORD_NUMBER: string;
+  WEBSITE_SETTING_URL: string;
+  WEBSITE_SETTING_COMPANY: string;
+  WEBSITE_SETTING_TIME: string;
+}
+
 export interface AppState {
   theme: string;
   colorWeak: boolean;
@@ -16,5 +25,5 @@ export interface AppState {
   tabBar: boolean;
   menuFromServer: boolean;
   serverMenu: RouteRecordNormalized[];
-  [key: string]: unknown;
+  websiteSetting: WebsiteSetting;
 }

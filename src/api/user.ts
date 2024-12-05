@@ -33,3 +33,7 @@ export function updateInfo(data: any) {
 export function modifyPassword(data: any) {
   return axios.post(`/system/user/modifyPassword`, data);
 }
+
+export function getWebsiteSetting() {
+  return axios.get('/system/getWebsiteSetting');
+}

@@ -174,6 +174,7 @@
   const triggerBtn = ref();
   const handleLogout = () => {
     logout();
+    appStore.clearWebsiteSetting();
   };
   const setDropDownVisible = () => {
     const event = new MouseEvent('click', {

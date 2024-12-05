@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 import type { RouteRecordNormalized } from 'vue-router';
 import defaultSettings from '@/config/settings.json';
-import { getMenuList } from '@/api/user';
-import { AppState } from './types';
+import { getMenuList, getWebsiteSetting } from '@/api/user';
+import { AppState, WebsiteSetting } from './types';
 
 const useAppStore = defineStore('app', {
   state: (): AppState => ({ ...defaultSettings }),
@@ -16,6 +16,9 @@ const useAppStore = defineStore('app', {
     },
     appAsyncMenus(state: AppState): RouteRecordNormalized[] {
       return state.serverMenu as unknown as RouteRecordNormalized[];
+    },
+    appAsyncWebsiteSetting(state: AppState): WebsiteSetting {
+      return state.websiteSetting;
     },
   },
 
@@ -48,6 +51,22 @@ const useAppStore = defineStore('app', {
     },
     clearServerMenu() {
       this.serverMenu = [];
+    },
+    async fetchServerWebsiteSetting() {
+      const { data } = await getWebsiteSetting();
+      Object.assign(this.websiteSetting, data);
+      document.title = this.websiteSetting.WEBSITE_SETTING_TITLE;
+    },
+    updateWebsiteSetting<K extends keyof typeof defaultSettings.websiteSetting>(
+      key: K,
+      val: string
+    ) {
+      if (this.websiteSetting[key] !== undefined) {
+        this.websiteSetting[key] = val;
+      }
+    },
+    clearWebsiteSetting() {
+      this.websiteSetting = {} as WebsiteSetting;
     },
   },
 });

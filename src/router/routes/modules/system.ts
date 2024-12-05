@@ -64,6 +64,38 @@ const SYSTEM: AppRouteRecordRaw = {
         },
       ],
     },
+    {
+      path: 'config',
+      name: 'SystemConfig',
+      component: '',
+      meta: {
+        locale: 'menu.system.config',
+        requiresAuth: true,
+        roles: ['*'],
+      },
+      children: [
+        {
+          path: 'group',
+          name: 'SystemConfigGroup',
+          component: () => import('@/views/system/config-group/index.vue'),
+          meta: {
+            locale: 'menu.system.config.group',
+            requiresAuth: true,
+            roles: ['*'],
+          },
+        },
+        {
+          path: 'list',
+          name: 'SystemConfigList',
+          component: () => import('@/views/system/config/index.vue'),
+          meta: {
+            locale: 'menu.system.config.list',
+            requiresAuth: true,
+            roles: ['*'],
+          },
+        },
+      ],
+    },
   ],
 };
 

@@ -13,5 +13,13 @@
   "device": "desktop",
   "tabBar": false,
   "menuFromServer": true,
-  "serverMenu": []
+  "serverMenu": [],
+  "websiteSetting": {
+    "WEBSITE_SETTING_TITLE": "HyperfAdmin",
+    "WEBSITE_SETTING_LOGO": "//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image",
+    "WEBSITE_SETTING_RECORD_NUMBER": "京ICP备1xxx8号",
+    "WEBSITE_SETTING_URL": "https://www.baidu.com",
+    "WEBSITE_SETTING_COMPANY": "HyperfAdmin",
+    "WEBSITE_SETTING_TIME": "@2023-2024"
+  }
 }
